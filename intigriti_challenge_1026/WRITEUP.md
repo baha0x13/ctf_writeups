@@ -104,7 +104,6 @@ INTIGRITI{094638e6-ba2f-4c50-8bb4-41ced0d5debd}
 - Complete bypass of pricing/discount limits on any order, not just the Midnight Collection.
 - Allows checkout for **€0.00** on an item worth €666.00 using only €66.00 of legitimate credit.
 - Since `NEWS30` is obtained with zero verification (any arbitrary email), an attacker needs no privileged state to reach this — only two publicly/trivially obtainable coupon codes and a sequence of ordinary API calls.
-- In a real e-commerce context this would translate directly to financial loss: unlimited free or near-free orders.
 
 ---
 
