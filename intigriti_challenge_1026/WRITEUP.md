@@ -107,14 +107,3 @@ INTIGRITI{094638e6-ba2f-4c50-8bb4-41ced0d5debd}
 
 ---
 
-## Suggested Remediation
-
-- Track **all** applied coupon codes per cart in a set/array and check membership against the full set, not just the last-applied value, when rejecting duplicates.
-- Additionally, enforce a maximum of one discount coupon (or an explicit, intentional stacking policy with a hard floor) per order server-side, recomputed from the authoritative list of applied codes rather than trusting incremental deltas.
-- Consider validating discount math end-to-end at checkout time (e.g. reject/flag any order where `total` falls below a sane minimum relative to `subtotal`) as defense in depth.
-
----
-
-## Timeline
-
-- Discovered and reported as part of the Intigriti Monthly Challenge (October).
