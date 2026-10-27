@@ -101,9 +101,20 @@ INTIGRITI{094638e6-ba2f-4c50-8bb4-41ced0d5debd}
 
 ## Impact
 
-- Complete bypass of pricing/discount limits on any order, not just the Midnight Collection.
-- Allows checkout for **€0.00** on an item worth €666.00 using only €66.00 of legitimate credit.
-- Since `NEWS30` is obtained with zero verification (any arbitrary email), an attacker needs no privileged state to reach this — only two publicly/trivially obtainable coupon codes and a sequence of ordinary API calls.
+The coupon endpoint only checks the last-applied code, not all codes already used. Alternating between NIGHT20 and NEWS30 re-applies each one repeatedly, stacking discounts past their intended one-time limit and dropping the cart total to €0.00. This allows checkout for any product at €0.00, regardless of its actual price, with no privileges or special access required,a full price bypass.
 
 ---
+
+## Recommanded remediation
+
+Track all applied coupon codes in a set/list per cart instead of storing only the last-applied code, and check membership against the full set before allowing a coupon to be applied:
+
+if not is_valid_coupon(incoming_code):
+    reject("Invalid coupon code.")
+elif incoming_code in cart.applied_codes_set:
+    reject("Coupon already applied.")
+else:
+    apply_discount(incoming_code)
+    cart.applied_codes_set.add(incoming_code)
+
 
